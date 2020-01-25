@@ -376,6 +376,9 @@
           <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;Data Entry Operator&quot;, &quot;Driver&quot;, &quot;Machine Repair&quot;, &quot;Supervisor&quot;, &quot;Manager&quot;, &quot;Admin&quot; })" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="160" y="420" width="210" height="-1"/>

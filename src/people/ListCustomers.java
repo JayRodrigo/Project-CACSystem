@@ -8,6 +8,7 @@ package people;
 import maintenance.*;
 import common.PredefineMethods;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -293,23 +294,26 @@ public class ListCustomers extends javax.swing.JFrame {
     }//GEN-LAST:event_editMouseClicked
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-    String qry = "Update customer SET "
-                    + "company = '"+PredefineMethods.getUpdateValue("Enter Company Name:", jtabmachine.getValueAt(row,1).toString())+"',"
-                    + "email = '"+PredefineMethods.getUpdateValue("Enter email:", jtabmachine.getValueAt(row,2).toString())+"',"
-                    + "phone = '"+PredefineMethods.getUpdateValue("Enter phone:", jtabmachine.getValueAt(row,3).toString())+"',"
-                    + "address = '"+PredefineMethods.getUpdateValue("Enter address:", jtabmachine.getValueAt(row,4).toString())+"',"
-                    + "city = '"+PredefineMethods.getUpdateValue("Enter city:", jtabmachine.getValueAt(row,5).toString())+"',"
-                    + "billing_address = '"+PredefineMethods.getUpdateValue("Enter billing Address:", jtabmachine.getValueAt(row,6).toString())+"',"
-                    + "billing_address1 = '"+PredefineMethods.getUpdateValue("Enter billing Address1:", jtabmachine.getValueAt(row,7).toString())+"',"
-                    + "billing_address2 = '"+PredefineMethods.getUpdateValue("Enter billing Address2:", jtabmachine.getValueAt(row,8).toString())+"',"
-                    + "billing_address3 = '"+PredefineMethods.getUpdateValue("Enter billing Address3:", jtabmachine.getValueAt(row,9).toString())+"',"
-                    + "state = '"+PredefineMethods.getUpdateValue("Enter state:", jtabmachine.getValueAt(row,10).toString())+"',"
-                    + "postal_code = '"+PredefineMethods.getUpdateValue("Enter postal_code:", jtabmachine.getValueAt(row,11).toString())+"',"
-                    + "vat_no = '"+PredefineMethods.getUpdateValue("Enter vatNo:", jtabmachine.getValueAt(row,12).toString())+"',"
-                    + "svat_no = '"+PredefineMethods.getUpdateValue("Enter svatNo:", jtabmachine.getValueAt(row,13).toString())+"' "
-                    + "where customer_id = '"+jtabmachine.getValueAt(row,0)+"'";
-            PredefineMethods.editDB(qry);
-            PredefineMethods.tableload("Select * from customer", jtabmachine);   
+    try {
+            String updateID = jtabmachine.getValueAt(row,0).toString();
+            String updateCompany = jtabmachine.getValueAt(row,1).toString();
+            String updateEmail = jtabmachine.getValueAt(row,2).toString();
+            String updatePhone = jtabmachine.getValueAt(row,3).toString();
+            String updateAddress = jtabmachine.getValueAt(row,4).toString();            
+            String updateCity = jtabmachine.getValueAt(row,5).toString();
+            String updateBillingAddress = jtabmachine.getValueAt(row,6).toString();
+            String updateBillingAddress1 = jtabmachine.getValueAt(row,7).toString();
+            String updateBillingAddress2 = jtabmachine.getValueAt(row,8).toString();
+            String updateBillingAddress3 = jtabmachine.getValueAt(row,9).toString();
+            String updateState = jtabmachine.getValueAt(row,10).toString();            
+            String updatePostalCode = jtabmachine.getValueAt(row,11).toString();
+            String updateVatNo = jtabmachine.getValueAt(row,12).toString();            
+            String updateSvatNo = jtabmachine.getValueAt(row,13).toString();
+            new UpdateCustomer(updateID,updateCompany,updateEmail,updatePhone,updateAddress,updateCity,updateBillingAddress,updateBillingAddress1,updateBillingAddress2,updateBillingAddress3,updateState,updatePostalCode,updateVatNo,updateSvatNo).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
         
     }//GEN-LAST:event_editActionPerformed
 

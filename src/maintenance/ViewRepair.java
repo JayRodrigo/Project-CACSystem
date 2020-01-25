@@ -7,6 +7,7 @@ package maintenance;
 
 import common.PredefineMethods;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
     
@@ -242,13 +243,26 @@ public class ViewRepair extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-            String qry = "Update repair SET "
-                    + "name = '"+PredefineMethods.getUpdateValue("Enter Name:", jtabmachine.getValueAt(row,1).toString())+"',"
-                    + "department = '"+PredefineMethods.getUpdateValue("Enter Department:", jtabmachine.getValueAt(row,2).toString())+"',"
-                    + "repair_status = '"+PredefineMethods.getUpdateValue("Enter repair status:", jtabmachine.getValueAt(row,3).toString())+"'"
-                    + " where machine_ref_no = '"+jtabmachine.getValueAt(row,0)+"'";
-            PredefineMethods.editDB(qry);
-            PredefineMethods.tableload("Select * from repair", jtabmachine);   
+try {
+            String updateID = jtabmachine.getValueAt(row,0).toString();
+            String updateName = jtabmachine.getValueAt(row,1).toString();
+            String updateDepartment = jtabmachine.getValueAt(row,2).toString();
+            String updateRepairStatus = jtabmachine.getValueAt(row,3).toString();
+            String updateDate = jtabmachine.getValueAt(row,4).toString();
+            new UpdateRepair(updateID,updateName,updateDepartment,updateRepairStatus,updateDate).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateRepair.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(UpdateRepair.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//            String qry = "Update repair SET "
+//                    + "name = '"+PredefineMethods.getUpdateValue("Enter Name:", jtabmachine.getValueAt(row,1).toString())+"',"
+//                    + "department = '"+PredefineMethods.getUpdateValue("Enter Department:", jtabmachine.getValueAt(row,2).toString())+"',"
+//                    + "repair_status = '"+PredefineMethods.getUpdateValue("Enter repair status:", jtabmachine.getValueAt(row,3).toString())+"'"
+//                    + " where machine_ref_no = '"+jtabmachine.getValueAt(row,0)+"'";
+//            PredefineMethods.editDB(qry);
+//            PredefineMethods.tableload("Select * from repair", jtabmachine);   
     }//GEN-LAST:event_editActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -323,7 +337,7 @@ public class ViewRepair extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewTools().setVisible(true);
+                new ViewRepair().setVisible(true);
             }
         });
     }

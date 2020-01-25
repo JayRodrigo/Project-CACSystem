@@ -50,6 +50,7 @@ public class People extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        attendance = new java.awt.Button();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(940, 480));
@@ -205,6 +206,17 @@ public class People extends javax.swing.JInternalFrame {
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 82, 680, 10));
 
+        attendance.setBackground(new java.awt.Color(24, 110, 67));
+        attendance.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        attendance.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        attendance.setLabel("Attendance");
+        attendance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                attendanceActionPerformed(evt);
+            }
+        });
+        jPanel2.add(attendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, 140, 50));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DashboardBackground.jpg"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 480));
 
@@ -345,8 +357,18 @@ public class People extends javax.swing.JInternalFrame {
            ob1.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void attendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceActionPerformed
+        try {
+            Attendance a = new Attendance();
+            a.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(People.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_attendanceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button attendance;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;

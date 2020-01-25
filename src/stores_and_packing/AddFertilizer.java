@@ -85,6 +85,11 @@ public class AddFertilizer extends javax.swing.JFrame {
         getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 490, 13));
 
         typet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select..", "Rock Phosphate", "Superphosphate", "Slag", "Bonemeal", "Muriate Of Potash", "Sulphate Of Potash", "Liquid fertilizers", " ", " " }));
+        typet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typetActionPerformed(evt);
+            }
+        });
         getContentPane().add(typet, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 180, 25));
 
         jLabel2.setText("Note");
@@ -174,6 +179,10 @@ public class AddFertilizer extends javax.swing.JFrame {
     private void quaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_quaKeyTyped
 
     }//GEN-LAST:event_quaKeyTyped
+
+    private void typetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_typetActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -204,7 +213,7 @@ public class AddFertilizer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewTools().setVisible(true);
+                new ViewFertilizer().setVisible(true);
             }
         });
     }

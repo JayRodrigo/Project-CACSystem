@@ -154,12 +154,12 @@ public class Login extends javax.swing.JFrame {
             new MainWindow().setVisible(true);
             try {
                 String cur_dir = System.getProperty("user.dir");
-                PredefineMethods.writeInFile(cur_dir+"\\output\\userType.txt", "admin");
+                PredefineMethods.writeInFile(cur_dir+"\\output\\userType.txt", username);
             } catch (IOException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);}
         }else if(username.equals("") || password.equals("")){PredefineMethods.viewJoptionPane("You must specify values for the required fields.");}
         else{PredefineMethods.viewJoptionPane("Data Missmatch");}
-        
+                
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passMouseClicked

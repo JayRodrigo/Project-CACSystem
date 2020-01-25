@@ -7,6 +7,7 @@ package maintenance;
 
 import common.PredefineMethods;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -257,19 +258,21 @@ public class ViewVehicles extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-    String qry = "Update vehicle SET "
-                    + "model = '"+PredefineMethods.getUpdateValue("Enter Model:", jtabmachine.getValueAt(row,1).toString())+"',"
-                    + "type = '"+PredefineMethods.getUpdateValue("Enter Type:", jtabmachine.getValueAt(row,2).toString())+"',"
-                    + "colour = '"+PredefineMethods.getUpdateValue("Enter colour", jtabmachine.getValueAt(row,3).toString())+"',"
-                    + "mileage = '"+PredefineMethods.getUpdateValue("Enter mileage:", jtabmachine.getValueAt(row,4).toString())+"',"
-                    + "purchase_date = '"+PredefineMethods.getUpdateValue("Enter date purchased:", jtabmachine.getValueAt(row,5).toString())+"',"
-                    + "year = '"+PredefineMethods.getUpdateValue("Enter Year:", jtabmachine.getValueAt(row,6).toString())+"',"
-                    + "dealer = '"+PredefineMethods.getUpdateValue("Enter dealer:", jtabmachine.getValueAt(row,7).toString())+"',"
-                    + "status = '"+PredefineMethods.getUpdateValue("Enter status:", jtabmachine.getValueAt(row,8).toString())+"' "
-                    + "where vehicle_no = '"+jtabmachine.getValueAt(row,0)+"'";
-    
-                PredefineMethods.editDB(qry);
-    PredefineMethods.tableload("Select * from vehicle", jtabmachine);  
+    try {
+            String updateVehicleNo = jtabmachine.getValueAt(row,0).toString();
+            String updateModel = jtabmachine.getValueAt(row,1).toString();
+            String updateType = jtabmachine.getValueAt(row,2).toString();
+            String updateColour = jtabmachine.getValueAt(row,3).toString();
+            String updateMileage = jtabmachine.getValueAt(row,4).toString();
+            String updatePD = jtabmachine.getValueAt(row,5).toString();
+            String updateYear = jtabmachine.getValueAt(row,6).toString();
+            String updateDealer = jtabmachine.getValueAt(row,7).toString();
+            String updateStatus = jtabmachine.getValueAt(row,8).toString();  
+            new UpdateVehicle(updateVehicleNo,updateModel,updateType,updateColour,updateMileage,updatePD,updateYear,updateDealer,updateStatus).setVisible(true);
+        } catch (ParseException ex) {
+            Logger.getLogger(UpdateVehicle.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+ 
     
     }//GEN-LAST:event_editActionPerformed
 

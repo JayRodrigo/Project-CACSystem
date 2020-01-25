@@ -13,12 +13,12 @@ import javax.swing.JButton;
  *
  * @author User
  */
-public class Process extends javax.swing.JInternalFrame {
+public class Attendance extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Production
      */
-    public Process() {
+    public Attendance() {
         initComponents();
     }
     

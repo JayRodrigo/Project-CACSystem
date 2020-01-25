@@ -7,6 +7,7 @@ package maintenance;
 
 import common.PredefineMethods;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -293,15 +294,21 @@ public class ViewMachine extends javax.swing.JFrame {
     }//GEN-LAST:event_editMouseClicked
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-    String qry = "Update machine SET "
-                    + "name = '"+PredefineMethods.getUpdateValue("Enter Name:", jtabmachine.getValueAt(row,1).toString())+"',"
-                    + "manufacturer = '"+PredefineMethods.getUpdateValue("Enter Manufaturer:", jtabmachine.getValueAt(row,2).toString())+"',"
-                    + "date_of_purchase = '"+PredefineMethods.getUpdateValue("Enter date Purchased:", jtabmachine.getValueAt(row,3).toString())+"',"
-                    + "department = '"+PredefineMethods.getUpdateValue("Enter department:", jtabmachine.getValueAt(row,4).toString())+"',"
-                    + "status = '"+PredefineMethods.getUpdateValue("Enter status:", jtabmachine.getValueAt(row,5).toString())+"' "
-                    + "where machine_ref_no = '"+jtabmachine.getValueAt(row,0)+"'";
-            PredefineMethods.editDB(qry);
-            PredefineMethods.tableload("Select * from machine", jtabmachine);   
+
+        try {
+            String updateID = jtabmachine.getValueAt(row,0).toString();
+            String updateName = jtabmachine.getValueAt(row,1).toString();
+            String updateManufacturer = jtabmachine.getValueAt(row,2).toString();
+            String updateDOP = jtabmachine.getValueAt(row,3).toString();
+            String updateDepartment = jtabmachine.getValueAt(row,4).toString();            
+            String updateStatus = jtabmachine.getValueAt(row,5).toString();
+            new UpdateMachine(updateID,updateName,updateManufacturer,updateDOP,updateDepartment,updateStatus).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateMachine.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(UpdateMachine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         
     }//GEN-LAST:event_editActionPerformed
 

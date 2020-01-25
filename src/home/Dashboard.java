@@ -5,6 +5,9 @@
  */
 package home;
 
+import common.PredefineMethods;
+import java.sql.SQLException;
+
 /**
  *
  *
@@ -14,8 +17,14 @@ public class Dashboard extends javax.swing.JInternalFrame {
     /**
      * Creates new form Dashboard2
      */
-    public Dashboard() {
+    public Dashboard() throws SQLException {
         initComponents();
+        PredefineMethods.tableload("SELECT name,type,quantity FROM fertilizer WHERE quantity<=10", jTable1);
+        PredefineMethods.tableload("SELECT name,type,quantity FROM chemical WHERE quantity<=10", jTable2);
+//        jLabel8.setText( PredefineMethods.viewDBValue("SELECT COUNT(*) FROM service","Services_Count"));
+        jLabel8.setText(PredefineMethods.viewDBValue("SELECT COUNT(service_no) as service_no FROM service", "service_no"));
+        jLabel10.setText(PredefineMethods.viewDBValue("SELECT COUNT(machine_ref_no) as machine_ref_no FROM repair WHERE repair_status='Available'", "machine_ref_no"));
+        jLabel7.setText(PredefineMethods.viewDBValue("SELECT COUNT(epfNo) as empCount FROM employee WHERE availability='Available'", "empCount"));
     }
 
     /**
@@ -27,16 +36,17 @@ public class Dashboard extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
+        status = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         att = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        repairList = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         mac = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        empAvailable = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -44,8 +54,13 @@ public class Dashboard extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
+        serviceList = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setMaximumSize(new java.awt.Dimension(940, 480));
@@ -69,41 +84,30 @@ public class Dashboard extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 220, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 310, 220, 90));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CurrentProcess.png"))); // NOI18N
-        jLabel5.setText("jLabel4");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel5MouseExited(evt);
-            }
+        status.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CurrentProcess.png"))); // NOI18N
+        status.setText("jLabel4");
+        status.setFocusCycleRoot(true);
+        status.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel5MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jLabel5MouseReleased(evt);
+                statusMousePressed(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 130, 130));
+        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 130, 130));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Current Process Status :-");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 150, 20));
+        jLabel9.setText("Current Status");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 90, 20));
 
         att.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         att.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(att, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 70, 20));
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MachineRepair.png"))); // NOI18N
-        jLabel19.setText("jLabel4");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 130, 130));
+        repairList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MachineRepair.png"))); // NOI18N
+        repairList.setText("jLabel4");
+        jPanel1.add(repairList, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 130, 130));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,14 +118,9 @@ public class Dashboard extends javax.swing.JInternalFrame {
         mac.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(mac, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 450, 70, 20));
 
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EmployeeAttendance.png"))); // NOI18N
-        jLabel22.setText("jLabel4");
-        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel22MouseClicked(evt);
-            }
-        });
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 130, 130));
+        empAvailable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EmployeeAttendance.png"))); // NOI18N
+        empAvailable.setText("jLabel4");
+        jPanel1.add(empAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 130, 130));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
@@ -133,11 +132,11 @@ public class Dashboard extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(248, 65, 65));
         jLabel6.setText("Critical Level Chemical Stocks");
         jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, 220, 40));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, 220, 40));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Vehicles Available :-");
+        jLabel15.setText("Machines to be Service :-");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 150, 20));
 
         ve.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -156,17 +155,53 @@ public class Dashboard extends javax.swing.JInternalFrame {
         jLabel3.setText("jLabel3");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 50, 40));
 
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/VehicleAvailable.png"))); // NOI18N
-        jLabel25.setText("jLabel4");
-        jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel25MouseClicked(evt);
+        serviceList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/VehicleAvailable.png"))); // NOI18N
+        serviceList.setText("jLabel4");
+        serviceList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                serviceListMousePressed(evt);
             }
         });
-        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 130, 130));
+        jPanel1.add(serviceList, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 130, 130));
 
-        jSeparator2.setForeground(new java.awt.Color(248, 65, 65));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 210, 10));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Attend");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 40, 20));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Service");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 50, 20));
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Machine");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 50, 20));
+
+        jLabel11.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(248, 65, 65));
+        jLabel11.setText("Critical Level Fertilizer Stocks");
+        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 220, 40));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 220, 90));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DashboardBackground.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -187,7 +222,7 @@ public class Dashboard extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 484, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -202,55 +237,45 @@ public class Dashboard extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-
-    }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5MouseEntered
+    }//GEN-LAST:event_jTable2MouseClicked
 
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5MouseExited
+    private void statusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_statusMousePressed
+        new ViewStatus().setVisible(true);
+    }//GEN-LAST:event_statusMousePressed
 
-    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5MousePressed
-
-    private void jLabel5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel5MouseReleased
-
-    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
-
-    }//GEN-LAST:event_jLabel22MouseClicked
-
-    private void jLabel25MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel25MouseClicked
+    private void serviceListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serviceListMousePressed
+        new ViewServices().setVisible(true);
+    }//GEN-LAST:event_serviceListMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel att;
+    private javax.swing.JLabel empAvailable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel mac;
+    private javax.swing.JLabel repairList;
+    private javax.swing.JLabel serviceList;
+    private javax.swing.JLabel status;
     private javax.swing.JLabel ve;
     // End of variables declaration//GEN-END:variables
 }

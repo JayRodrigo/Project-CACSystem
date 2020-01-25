@@ -10,13 +10,14 @@ import inventory.Inventory;
 import stores_and_packing.StoresPacking;
 import java.awt.Color;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import maintenance.Maintenance;
 import people.People;
-import production.Process;
+import production.Attendance;
 
 /**
  *
@@ -64,15 +65,15 @@ public class MainWindow extends javax.swing.JFrame {
         People = new javax.swing.JPanel();
         DashboardImg7 = new javax.swing.JLabel();
         Dashboard7 = new javax.swing.JLabel();
-        DB = new javax.swing.JPanel();
-        DashboardImg8 = new javax.swing.JLabel();
-        Dashboard8 = new javax.swing.JLabel();
         SPL = new javax.swing.JPanel();
         DashboardImg9 = new javax.swing.JLabel();
         Dashboard9 = new javax.swing.JLabel();
         Dash = new javax.swing.JPanel();
         DashboardImg10 = new javax.swing.JLabel();
         Dashboard10 = new javax.swing.JLabel();
+        DB1 = new javax.swing.JPanel();
+        DashboardImg11 = new javax.swing.JLabel();
+        Dashboard11 = new javax.swing.JLabel();
         TopPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -105,7 +106,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Welcome..");
+        jLabel1.setText("Welcome");
         TopPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, 130, -1));
 
         jButton1.setBackground(new java.awt.Color(15, 195, 15));
@@ -212,25 +213,6 @@ public class MainWindow extends javax.swing.JFrame {
         Dashboard1.setForeground(new java.awt.Color(255, 255, 255));
         Dashboard1.setText("Process");
 
-        javax.swing.GroupLayout ProductionLayout = new javax.swing.GroupLayout(Production);
-        Production.setLayout(ProductionLayout);
-        ProductionLayout.setHorizontalGroup(
-            ProductionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ProductionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(DashboardImg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Dashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
-        ProductionLayout.setVerticalGroup(
-            ProductionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DashboardImg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(Dashboard1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        SidePanel.add(Production, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, -1, -1));
-
         Inventory.setBackground(new java.awt.Color(0, 150, 150));
         Inventory.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -273,7 +255,31 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(Dashboard5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SidePanel.add(Inventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, -1, -1));
+        javax.swing.GroupLayout ProductionLayout = new javax.swing.GroupLayout(Production);
+        Production.setLayout(ProductionLayout);
+        ProductionLayout.setHorizontalGroup(
+            ProductionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Inventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DashboardImg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Dashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        ProductionLayout.setVerticalGroup(
+            ProductionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProductionLayout.createSequentialGroup()
+                .addGroup(ProductionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ProductionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(DashboardImg1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Dashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Inventory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SidePanel.add(Production, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, -1, 40));
 
         People.setBackground(new java.awt.Color(0, 150, 150));
         People.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -317,56 +323,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(Dashboard7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SidePanel.add(People, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, -1, -1));
-
-        DB.setBackground(new java.awt.Color(0, 150, 150));
-        DB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DBMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                DBMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                DBMouseExited(evt);
-            }
-        });
-
-        DashboardImg8.setForeground(new java.awt.Color(255, 255, 255));
-        DashboardImg8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Maintanance.png"))); // NOI18N
-        DashboardImg8.setText("jLabel1");
-        DashboardImg8.setMaximumSize(new java.awt.Dimension(50, 40));
-        DashboardImg8.setMinimumSize(new java.awt.Dimension(50, 40));
-        DashboardImg8.setPreferredSize(new java.awt.Dimension(50, 40));
-
-        Dashboard8.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Dashboard8.setForeground(new java.awt.Color(255, 255, 255));
-        Dashboard8.setText("Maintenance");
-        Dashboard8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Dashboard8MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout DBLayout = new javax.swing.GroupLayout(DB);
-        DB.setLayout(DBLayout);
-        DBLayout.setHorizontalGroup(
-            DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DBLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(DashboardImg8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Dashboard8, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-        DBLayout.setVerticalGroup(
-            DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(DashboardImg8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Dashboard8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        SidePanel.add(DB, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, -1, -1));
+        SidePanel.add(People, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, -1));
 
         SPL.setBackground(new java.awt.Color(0, 150, 150));
         SPL.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -410,7 +367,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(Dashboard9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SidePanel.add(SPL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, -1));
+        SidePanel.add(SPL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 40));
 
         Dash.setBackground(new java.awt.Color(0, 150, 150));
         Dash.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -455,6 +412,55 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         SidePanel.add(Dash, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+
+        DB1.setBackground(new java.awt.Color(0, 150, 150));
+        DB1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DB1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DB1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DB1MouseExited(evt);
+            }
+        });
+
+        DashboardImg11.setForeground(new java.awt.Color(255, 255, 255));
+        DashboardImg11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Maintanance.png"))); // NOI18N
+        DashboardImg11.setText("jLabel1");
+        DashboardImg11.setMaximumSize(new java.awt.Dimension(50, 40));
+        DashboardImg11.setMinimumSize(new java.awt.Dimension(50, 40));
+        DashboardImg11.setPreferredSize(new java.awt.Dimension(50, 40));
+
+        Dashboard11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Dashboard11.setForeground(new java.awt.Color(255, 255, 255));
+        Dashboard11.setText("Maintenance");
+        Dashboard11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Dashboard11MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout DB1Layout = new javax.swing.GroupLayout(DB1);
+        DB1.setLayout(DB1Layout);
+        DB1Layout.setHorizontalGroup(
+            DB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DB1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(DashboardImg11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Dashboard11, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        DB1Layout.setVerticalGroup(
+            DB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DB1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(DashboardImg11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Dashboard11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SidePanel.add(DB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, -1, -1));
 
         getContentPane().add(SidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 260, 480));
 
@@ -593,7 +599,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ProductionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProductionMouseClicked
-        Process ob1 = new Process() {};
+        Attendance ob1 = new Attendance() {};
         BasicInternalFrameUI bi = (BasicInternalFrameUI)ob1.getUI();
         bi.setNorthPane(null);
         desktopPane.add(ob1).setVisible(true);
@@ -645,23 +651,6 @@ public class MainWindow extends javax.swing.JFrame {
         PredefineMethods.resetColor(People);
     }//GEN-LAST:event_PeopleMouseExited
 
-    private void DBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DBMouseClicked
-        try{
-            Maintenance ob1 = new Maintenance();
-        BasicInternalFrameUI bi = (BasicInternalFrameUI)ob1.getUI();
-        bi.setNorthPane(null);
-        desktopPane.add(ob1).setVisible(true);
-        }catch(Exception e){e.printStackTrace();}
-    }//GEN-LAST:event_DBMouseClicked
-
-    private void DBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DBMouseEntered
-        PredefineMethods.setColor(DB);
-    }//GEN-LAST:event_DBMouseEntered
-
-    private void DBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DBMouseExited
-        PredefineMethods.resetColor(DB);
-    }//GEN-LAST:event_DBMouseExited
-
     private void SPLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SPLMouseClicked
         StoresPacking ob1;
         try {
@@ -684,10 +673,14 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_SPLMouseExited
 
     private void DashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashMouseClicked
-        Dashboard ob1 = new Dashboard();
-        BasicInternalFrameUI bi = (BasicInternalFrameUI)ob1.getUI();
-        bi.setNorthPane(null);
-        desktopPane.add(ob1).setVisible(true);
+        try {
+            Dashboard ob1 = new Dashboard();
+            BasicInternalFrameUI bi = (BasicInternalFrameUI)ob1.getUI();
+            bi.setNorthPane(null);
+            desktopPane.add(ob1).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_DashMouseClicked
 
     private void DashMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashMouseEntered
@@ -714,9 +707,26 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void Dashboard8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Dashboard8MouseClicked
+    private void Dashboard11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Dashboard11MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_Dashboard8MouseClicked
+    }//GEN-LAST:event_Dashboard11MouseClicked
+
+    private void DB1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DB1MouseClicked
+       try{
+            Maintenance ob1 = new Maintenance();
+        BasicInternalFrameUI bi = (BasicInternalFrameUI)ob1.getUI();
+        bi.setNorthPane(null);
+        desktopPane.add(ob1).setVisible(true);
+        }catch(Exception e){e.printStackTrace();}
+    }//GEN-LAST:event_DB1MouseClicked
+
+    private void DB1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DB1MouseEntered
+        PredefineMethods.setColor(DB1);
+    }//GEN-LAST:event_DB1MouseEntered
+
+    private void DB1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DB1MouseExited
+        PredefineMethods.resetColor(DB1);
+    }//GEN-LAST:event_DB1MouseExited
 
     /**
      * @param args the command line arguments
@@ -764,19 +774,19 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel CurrDate1;
     private javax.swing.JLabel CurrTime;
     private javax.swing.JLabel CurrTime1;
-    private javax.swing.JPanel DB;
+    private javax.swing.JPanel DB1;
     private javax.swing.JPanel Dash;
     private javax.swing.JLabel Dashboard1;
     private javax.swing.JLabel Dashboard10;
+    private javax.swing.JLabel Dashboard11;
     private javax.swing.JLabel Dashboard5;
     private javax.swing.JLabel Dashboard7;
-    private javax.swing.JLabel Dashboard8;
     private javax.swing.JLabel Dashboard9;
     private javax.swing.JLabel DashboardImg1;
     private javax.swing.JLabel DashboardImg10;
+    private javax.swing.JLabel DashboardImg11;
     private javax.swing.JLabel DashboardImg5;
     private javax.swing.JLabel DashboardImg7;
-    private javax.swing.JLabel DashboardImg8;
     private javax.swing.JLabel DashboardImg9;
     private javax.swing.JPanel DynamicPanel;
     private javax.swing.JPanel Inventory;

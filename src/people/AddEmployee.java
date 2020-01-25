@@ -32,6 +32,8 @@ public class AddEmployee extends javax.swing.JFrame {
         employeeNo.setText(Integer.toString((Integer.parseInt(PredefineMethods.
                 viewDBValue("SELECT MAX(empNo) as last_emp_id FROM employee", "last_emp_id")))+1));
     }
+ 
+
     
     private void setAllNull(){
         epfNo.setText("");
@@ -239,6 +241,11 @@ public class AddEmployee extends javax.swing.JFrame {
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 100, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Data Entry Operator", "Driver", "Machine Repair", "Supervisor", "Manager", "Admin" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 210, -1));
 
         name1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -298,7 +305,7 @@ public class AddEmployee extends javax.swing.JFrame {
 	String e_dob= PredefineMethods.getSelectedDate(empDOB);    
 	String e_nic=nic.getText();
         String date = PredefineMethods.getSelectedDate(empJD);
-	int e_ul=jComboBox1.getSelectedIndex();
+	String e_ul= PredefineMethods.getSelectedCombo(jComboBox1);
        
         String qry = "INSERT INTO employee (epfNo, fname, lname, email, phone, address, dob, nic, jdate, user_level) VALUES"
                 + "('"+e_epfno+"',"
@@ -313,7 +320,7 @@ public class AddEmployee extends javax.swing.JFrame {
                 + "'"+e_ul+"')";
         
         PredefineMethods.editDB(qry);
-            PredefineMethods.viewJoptionPane("Customer Successfully Added");
+            PredefineMethods.viewJoptionPane("Employee Successfully Added");
             try {
                 employeeNo.setText(Integer.toString((Integer.parseInt(PredefineMethods.
                         viewDBValue("SELECT MAX(empNo) as last_emp_id FROM employee", "last_emp_id")))+1));
@@ -325,7 +332,7 @@ public class AddEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_addCustomerActionPerformed
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
- setAllNull();    
+        this.dispose();    
     }//GEN-LAST:event_CancelActionPerformed
 
     private void addressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_addressFocusGained
@@ -363,6 +370,10 @@ public class AddEmployee extends javax.swing.JFrame {
     private void addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addressActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

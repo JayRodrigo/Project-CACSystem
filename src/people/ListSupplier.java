@@ -294,20 +294,24 @@ public class ListSupplier extends javax.swing.JFrame {
     }//GEN-LAST:event_editMouseClicked
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-    String qry = "Update supplier SET "
-                    + "name = '"+PredefineMethods.getUpdateValue("Enter Name:", jtabmachine.getValueAt(row,1).toString())+"',"
-                    + "email = '"+PredefineMethods.getUpdateValue("Enter email:", jtabmachine.getValueAt(row,2).toString())+"',"
-                    + "phone = '"+PredefineMethods.getUpdateValue("Enter phone:", jtabmachine.getValueAt(row,3).toString())+"',"
-                    + "company = '"+PredefineMethods.getUpdateValue("Enter company:", jtabmachine.getValueAt(row,4).toString())+"',"
-                    + "address = '"+PredefineMethods.getUpdateValue("Enter address:", jtabmachine.getValueAt(row,5).toString())+"',"
-                    + "city = '"+PredefineMethods.getUpdateValue("Enter city:", jtabmachine.getValueAt(row,6).toString())+"',"
-                    + "state = '"+PredefineMethods.getUpdateValue("Enter state:", jtabmachine.getValueAt(row,7).toString())+"',"
-                    + "postal_code = '"+PredefineMethods.getUpdateValue("Enter postal Code:", jtabmachine.getValueAt(row,8).toString())+"',"
-                    + "country = '"+PredefineMethods.getUpdateValue("Enter country:", jtabmachine.getValueAt(row,9).toString())+"' "
-                    + "where supplier_id = '"+jtabmachine.getValueAt(row,0)+"'";
-            PredefineMethods.editDB(qry);
-            PredefineMethods.tableload("Select * from supplier", jtabmachine);   
-        
+    try {
+            String updateID = jtabmachine.getValueAt(row,0).toString();
+            String updateName = jtabmachine.getValueAt(row,1).toString();
+            String updateEmail = jtabmachine.getValueAt(row,2).toString();
+            String updatePhone = jtabmachine.getValueAt(row,3).toString();
+            String updateCompany = jtabmachine.getValueAt(row,4).toString();
+            String updateAddress = jtabmachine.getValueAt(row,5).toString();
+            String updateCity = jtabmachine.getValueAt(row,6).toString();
+            String updateState = jtabmachine.getValueAt(row,7).toString();
+            String updatePostalCode = jtabmachine.getValueAt(row,8).toString();
+            String updateCountry = jtabmachine.getValueAt(row,9).toString();
+            new UpdateSupplier(updateID,updateName,updateEmail,updatePhone,updateCompany,updateAddress,updateCity,updateState,updatePostalCode,updateCountry).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateSupplier.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+          
+    
+    
     }//GEN-LAST:event_editActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed

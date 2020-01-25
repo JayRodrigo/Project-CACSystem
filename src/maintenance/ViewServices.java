@@ -7,6 +7,7 @@ package maintenance;
 
 import common.PredefineMethods;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -290,14 +291,19 @@ row = jtabmachine.getSelectedRow();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-            String qry = "Update service SET "
-                    + "machine_ref_no = '"+PredefineMethods.getUpdateValue("Enter machine No:", jtabmachine.getValueAt(row,1).toString())+"',"
-                    + "type = '"+PredefineMethods.getUpdateValue("Enter type:", jtabmachine.getValueAt(row,2).toString())+"',"
-                    + "equipment_name = '"+PredefineMethods.getUpdateValue("Enter equipment Name:", jtabmachine.getValueAt(row,3).toString())+"',"
-                    + "date_of_service = '"+PredefineMethods.getUpdateValue("Enter date of Service:", jtabmachine.getValueAt(row,4).toString())+"' "
-                    + "where service_no = '"+jtabmachine.getValueAt(row,0)+"'";
-            PredefineMethods.editDB(qry);
-            PredefineMethods.tableload("Select * from service", jtabmachine); 
+    try {
+            String updateServiceID = jtabmachine.getValueAt(row,0).toString();
+            String updateMachineRefNo = jtabmachine.getValueAt(row,1).toString();
+            String updateType = jtabmachine.getValueAt(row,2).toString();
+            String updateEquipName = jtabmachine.getValueAt(row,3).toString();
+            String updateDOS = jtabmachine.getValueAt(row,4).toString(); 
+            new UpdateServices(updateServiceID,updateMachineRefNo,updateType,updateEquipName,updateDOS).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateServices.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(UpdateServices.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+                 
     }//GEN-LAST:event_editActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
@@ -362,7 +368,7 @@ row = jtabmachine.getSelectedRow();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewTools().setVisible(true);
+                new ViewServices().setVisible(true);
             }
         });
     }

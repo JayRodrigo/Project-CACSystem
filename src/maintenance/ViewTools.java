@@ -7,6 +7,7 @@ package maintenance;
 
 import common.PredefineMethods;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -292,14 +293,19 @@ public class ViewTools extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-       String qry = "Update tool SET "
-                    + "name = '"+PredefineMethods.getUpdateValue("Enter Name:", jtabmachine.getValueAt(row,1).toString())+"',"
-                    + "type = '"+PredefineMethods.getUpdateValue("Enter type", jtabmachine.getValueAt(row,2).toString())+"',"
-                    + "quantity = '"+PredefineMethods.getUpdateValue("Enter quintaty:", jtabmachine.getValueAt(row,3).toString())+"',"
-                    + "date_of_purchase = '"+PredefineMethods.getUpdateValue("Enter date of purchase:", jtabmachine.getValueAt(row,4).toString())+"' "
-                    + "where tool_ref_no = '"+jtabmachine.getValueAt(row,0)+"'";
-            PredefineMethods.editDB(qry);
-            PredefineMethods.tableload("Select * from tool", jtabmachine);   
+       try {
+            String updateToolID = jtabmachine.getValueAt(row,0).toString();
+            String updateName = jtabmachine.getValueAt(row,1).toString();
+            String updateType = jtabmachine.getValueAt(row,2).toString();
+            String updateQuantity = jtabmachine.getValueAt(row,3).toString();
+            String updateDOP = jtabmachine.getValueAt(row,4).toString(); 
+            new UpdateTools(updateToolID,updateName,updateType,updateQuantity,updateDOP).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateTools.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(UpdateTools.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        
     }//GEN-LAST:event_editActionPerformed
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed

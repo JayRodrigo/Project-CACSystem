@@ -232,7 +232,7 @@ public class AddMachine extends javax.swing.JFrame {
                + "'"+PredefineMethods.getSelectedCombo(stat)+"')";
        
        PredefineMethods.editDB(qry);
-       PredefineMethods.viewJoptionPane("Customer Successfully Added");
+       PredefineMethods.viewJoptionPane("Machine Successfully Added");
             
         try {
             machrefno.setText(Integer.toString((Integer.parseInt(PredefineMethods.

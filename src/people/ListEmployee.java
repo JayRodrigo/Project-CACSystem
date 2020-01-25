@@ -8,6 +8,7 @@ package people;
 import maintenance.*;
 import common.PredefineMethods;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -294,20 +295,39 @@ public class ListEmployee extends javax.swing.JFrame {
     }//GEN-LAST:event_editMouseClicked
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
-    String qry = "Update employee SET "
-                    + "epfNo = '"+PredefineMethods.getUpdateValue("Enter EPF no:", jtabmachine.getValueAt(row,1).toString())+"',"
-                    + "fname = '"+PredefineMethods.getUpdateValue("Enter First Name:", jtabmachine.getValueAt(row,2).toString())+"',"
-                    + "lname = '"+PredefineMethods.getUpdateValue("Enter Last name:", jtabmachine.getValueAt(row,3).toString())+"',"
-                    + "email = '"+PredefineMethods.getUpdateValue("Enter email:", jtabmachine.getValueAt(row,4).toString())+"',"
-                    + "phone = '"+PredefineMethods.getUpdateValue("Enter phone:", jtabmachine.getValueAt(row,5).toString())+"',"
-                    + "address = '"+PredefineMethods.getUpdateValue("Enter Address:", jtabmachine.getValueAt(row,6).toString())+"',"
-                    + "dob = '"+PredefineMethods.getUpdateValue("Enter Date of Birth:", jtabmachine.getValueAt(row,7).toString())+"',"
-                    + "nic = '"+PredefineMethods.getUpdateValue("Enter NIC:", jtabmachine.getValueAt(row,8).toString())+"',"
-                    + "jdate = '"+PredefineMethods.getUpdateValue("Enter join Date:", jtabmachine.getValueAt(row,9).toString())+"',"
-                    + "user_level = '"+PredefineMethods.getUpdateValue("Enter user Level:", jtabmachine.getValueAt(row,10).toString())+"' "
-                    + "where empNo = '"+jtabmachine.getValueAt(row,0)+"'";
-            PredefineMethods.editDB(qry);
-            PredefineMethods.tableload("Select * from employee", jtabmachine);   
+    try {
+            String updateEmpNo = jtabmachine.getValueAt(row,0).toString();
+            String updateEpfNo = jtabmachine.getValueAt(row,1).toString();
+            String updateFname = jtabmachine.getValueAt(row,2).toString();
+            String updateLname = jtabmachine.getValueAt(row,3).toString();
+            String updateEmail = jtabmachine.getValueAt(row,4).toString();            
+            String updatePhone = jtabmachine.getValueAt(row,5).toString();
+            String updateAddress = jtabmachine.getValueAt(row,6).toString();
+            String updateDOB = jtabmachine.getValueAt(row,7).toString();
+            String updateNIC = jtabmachine.getValueAt(row,8).toString();
+            String updateJDate = jtabmachine.getValueAt(row,9).toString();
+            String updateUserLevel = jtabmachine.getValueAt(row,10).toString();
+            new UpdateEmployee(updateEmpNo,updateEpfNo,updateFname,updateLname,updateEmail,updatePhone,updateAddress,updateDOB,updateNIC,updateJDate,updateUserLevel).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(ListEmployee.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    
+    //            String qry = "Update employee SET "
+//                    + "epfNo = '"+PredefineMethods.getUpdateValue("Enter EPF no:", jtabmachine.getValueAt(row,1).toString())+"',"
+//                    + "fname = '"+PredefineMethods.getUpdateValue("Enter First Name:", jtabmachine.getValueAt(row,2).toString())+"',"
+//                    + "lname = '"+PredefineMethods.getUpdateValue("Enter Last name:", jtabmachine.getValueAt(row,3).toString())+"',"
+//                    + "email = '"+PredefineMethods.getUpdateValue("Enter email:", jtabmachine.getValueAt(row,4).toString())+"',"
+//                    + "phone = '"+PredefineMethods.getUpdateValue("Enter phone:", jtabmachine.getValueAt(row,5).toString())+"',"
+//                    + "address = '"+PredefineMethods.getUpdateValue("Enter Address:", jtabmachine.getValueAt(row,6).toString())+"',"
+//                    + "dob = '"+PredefineMethods.getUpdateValue("Enter Date of Birth:", jtabmachine.getValueAt(row,7).toString())+"',"
+//                    + "nic = '"+PredefineMethods.getUpdateValue("Enter NIC:", jtabmachine.getValueAt(row,8).toString())+"',"
+//                    + "jdate = '"+PredefineMethods.getUpdateValue("Enter join Date:", jtabmachine.getValueAt(row,9).toString())+"',"
+//                    + "user_level = '"+PredefineMethods.getUpdateValue("Enter user Level:", jtabmachine.getValueAt(row,10).toString())+"' "
+//                    + "where empNo = '"+jtabmachine.getValueAt(row,0)+"'";
+//            PredefineMethods.editDB(qry);
+//            PredefineMethods.tableload("Select * from employee", jtabmachine);
         
     }//GEN-LAST:event_editActionPerformed
 

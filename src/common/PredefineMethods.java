@@ -104,7 +104,9 @@ public class PredefineMethods {
         //get Selected ComboBoxValue 
 //    public static String getSelectedDate(JCalendarCombo box){return box.getSelectedItem().toString();}
         public static String getSelectedDate(JDateChooser box) {
-        return box.getDate().toString();
+        SimpleDateFormat dcn = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
+        String date = dcn.format(box.getDate() );            
+        return date;
         }
     
     //get TextLabel Values to string
