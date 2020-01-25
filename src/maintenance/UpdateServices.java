@@ -23,6 +23,7 @@ public class UpdateServices extends javax.swing.JFrame {
      */
     public UpdateServices(String updateServiceID,String updateMachineRefNo,String updateType,String updateEquipName,String updateDOS) throws SQLException, ParseException {
         initComponents();
+        PredefineMethods.fillComboBox(machrefno, "SELECT machine_ref_no FROM machine");
         serno.setText(updateServiceID);
         PredefineMethods.setComboBox(machrefno, updateMachineRefNo);
         PredefineMethods.setComboBox(types, updateType);

@@ -17,17 +17,16 @@ import java.util.logging.Logger;
  *
  * @author User
  */
-public class ViewServices extends javax.swing.JFrame {
+public class MachineDetails extends javax.swing.JFrame {
     private int row;
     /**
      * Creates new form ViewTools
      */
-    public ViewServices() {
+    public MachineDetails() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        PredefineMethods.tableload("Select name,type,quantity from fertilizer", fertilizerTable);
-        PredefineMethods.tableload("Select name,type,quantity from chemical", chemicalTable);
-        PredefineMethods.tableload("Select name,type,quantity from plant", plantTable);  
+        PredefineMethods.tableload("SELECT machine_ref_no,name,department,date from repair", mRepairTable);        
+        PredefineMethods.tableload("Select machine_ref_no,equipment_name,type,date_of_service from service", mServiceTable);  
     }
 
     /**
@@ -42,17 +41,14 @@ public class ViewServices extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        chemical = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        chemicalTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        plantTable = new javax.swing.JTable();
-        plant = new javax.swing.JLabel();
-        fertilizer = new javax.swing.JLabel();
+        mServiceTable = new javax.swing.JTable();
+        service = new javax.swing.JLabel();
+        repair = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        fertilizerTable = new javax.swing.JTable();
+        mRepairTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,10 +65,6 @@ public class ViewServices extends javax.swing.JFrame {
         });
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        chemical.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        chemical.setText("Chemical");
-        jPanel3.add(chemical, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 140, -1));
-
         jSeparator4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 920, 13));
 
@@ -87,7 +79,7 @@ public class ViewServices extends javax.swing.JFrame {
         });
         jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 100, -1));
 
-        chemicalTable.setModel(new javax.swing.table.DefaultTableModel(
+        mServiceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -114,16 +106,24 @@ public class ViewServices extends javax.swing.JFrame {
                 "Tool Ref No", "Tool Name", "Type", "Quantity", "Date of Purchase"
             }
         ));
-        chemicalTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        mServiceTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                chemicalTableMouseClicked(evt);
+                mServiceTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(chemicalTable);
+        jScrollPane3.setViewportView(mServiceTable);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 220, 270));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 360, 270));
 
-        plantTable.setModel(new javax.swing.table.DefaultTableModel(
+        service.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        service.setText("Machine Services");
+        jPanel3.add(service, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 220, -1));
+
+        repair.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        repair.setText("Available Machine Repairs");
+        jPanel3.add(repair, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 330, -1));
+
+        mRepairTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -150,58 +150,14 @@ public class ViewServices extends javax.swing.JFrame {
                 "Tool Ref No", "Tool Name", "Type", "Quantity", "Date of Purchase"
             }
         ));
-        plantTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        mRepairTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                plantTableMouseClicked(evt);
+                mRepairTableMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(plantTable);
+        jScrollPane5.setViewportView(mRepairTable);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 220, 270));
-
-        plant.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        plant.setText("Plant");
-        jPanel3.add(plant, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 140, -1));
-
-        fertilizer.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        fertilizer.setText("Fertilizer");
-        jPanel3.add(fertilizer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 140, -1));
-
-        fertilizerTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Tool Ref No", "Tool Name", "Type", "Quantity", "Date of Purchase"
-            }
-        ));
-        fertilizerTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fertilizerTableMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(fertilizerTable);
-
-        jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 220, 270));
+        jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 360, 270));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -270,17 +226,13 @@ public class ViewServices extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel3MouseClicked
 
-    private void chemicalTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chemicalTableMouseClicked
+    private void mServiceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mServiceTableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_chemicalTableMouseClicked
+    }//GEN-LAST:event_mServiceTableMouseClicked
 
-    private void plantTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_plantTableMouseClicked
+    private void mRepairTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mRepairTableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_plantTableMouseClicked
-
-    private void fertilizerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fertilizerTableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fertilizerTableMouseClicked
+    }//GEN-LAST:event_mRepairTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -299,14 +251,70 @@ public class ViewServices extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewServices.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MachineDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewServices.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MachineDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewServices.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MachineDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewServices.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MachineDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -319,25 +327,22 @@ public class ViewServices extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewServices().setVisible(true);
+                new MachineDetails().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel chemical;
-    private javax.swing.JTable chemicalTable;
-    private javax.swing.JLabel fertilizer;
-    private javax.swing.JTable fertilizerTable;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JLabel plant;
-    private javax.swing.JTable plantTable;
+    private javax.swing.JTable mRepairTable;
+    private javax.swing.JTable mServiceTable;
+    private javax.swing.JLabel repair;
+    private javax.swing.JLabel service;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import maintenance.Maintenance;
@@ -47,7 +48,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        Minimize = new javax.swing.JLabel();
         Close = new javax.swing.JLabel();
         CurrDate = new javax.swing.JLabel();
         CurrTime = new javax.swing.JLabel();
@@ -118,18 +118,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         TopPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 80, 40, 40));
-
-        Minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Minimize.png"))); // NOI18N
-        Minimize.setText("jLabel1");
-        Minimize.setMaximumSize(new java.awt.Dimension(30, 30));
-        Minimize.setMinimumSize(new java.awt.Dimension(30, 30));
-        Minimize.setPreferredSize(new java.awt.Dimension(30, 30));
-        Minimize.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MinimizeMouseClicked(evt);
-            }
-        });
-        TopPanel.add(Minimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 30, 30));
 
         Close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Close.png"))); // NOI18N
         Close.setText("jLabel1");
@@ -584,12 +572,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void MinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MinimizeMouseClicked
- 
-    }//GEN-LAST:event_MinimizeMouseClicked
-
     private void CloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CloseMouseClicked
-
+        this.dispose();
     }//GEN-LAST:event_CloseMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -790,7 +774,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel DashboardImg9;
     private javax.swing.JPanel DynamicPanel;
     private javax.swing.JPanel Inventory;
-    private javax.swing.JLabel Minimize;
     private javax.swing.JLabel Minimize1;
     private javax.swing.JPanel People;
     private javax.swing.JPanel Production;

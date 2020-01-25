@@ -22,6 +22,7 @@ public class Attendance extends javax.swing.JFrame {
      */
     public Attendance() throws SQLException {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     
     public void setAllNull(){

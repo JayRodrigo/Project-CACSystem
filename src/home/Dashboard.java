@@ -23,6 +23,7 @@ public class Dashboard extends javax.swing.JInternalFrame {
         PredefineMethods.tableload("SELECT name,type,quantity FROM chemical WHERE quantity<=10", jTable2);
 //        jLabel8.setText( PredefineMethods.viewDBValue("SELECT COUNT(*) FROM service","Services_Count"));
         jLabel8.setText(PredefineMethods.viewDBValue("SELECT COUNT(service_no) as service_no FROM service", "service_no"));
+        vehiclelbl.setText(PredefineMethods.viewDBValue("SELECT COUNT(vehicle_no) as vehicle_no FROM vehicle", "vehicle_no"));
         jLabel10.setText(PredefineMethods.viewDBValue("SELECT COUNT(machine_ref_no) as machine_ref_no FROM repair WHERE repair_status='Available'", "machine_ref_no"));
         jLabel7.setText(PredefineMethods.viewDBValue("SELECT COUNT(epfNo) as empCount FROM employee WHERE availability='Available'", "empCount"));
     }
@@ -61,6 +62,8 @@ public class Dashboard extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        vehiclelbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setMaximumSize(new java.awt.Dimension(940, 480));
@@ -94,12 +97,12 @@ public class Dashboard extends javax.swing.JInternalFrame {
                 statusMousePressed(evt);
             }
         });
-        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 130, 130));
+        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 130, 130));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Current Status");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 90, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 90, 20));
 
         att.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         att.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,25 +110,35 @@ public class Dashboard extends javax.swing.JInternalFrame {
 
         repairList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/MachineRepair.png"))); // NOI18N
         repairList.setText("jLabel4");
-        jPanel1.add(repairList, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 130, 130));
+        repairList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                repairListMousePressed(evt);
+            }
+        });
+        jPanel1.add(repairList, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 130, 130));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Machines to be Repaired :-");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 430, 150, 20));
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, 150, 20));
 
         mac.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         mac.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(mac, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 450, 70, 20));
+        jPanel1.add(mac, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 70, 20));
 
         empAvailable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EmployeeAttendance.png"))); // NOI18N
         empAvailable.setText("jLabel4");
-        jPanel1.add(empAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 130, 130));
+        empAvailable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                empAvailableMousePressed(evt);
+            }
+        });
+        jPanel1.add(empAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 130, 130));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Today's Employee Attendance :-");
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 180, 20));
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 180, 20));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -137,7 +150,7 @@ public class Dashboard extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Machines to be Service :-");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 150, 20));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 150, 20));
 
         ve.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ve.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,19 +175,19 @@ public class Dashboard extends javax.swing.JInternalFrame {
                 serviceListMousePressed(evt);
             }
         });
-        jPanel1.add(serviceList, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 130, 130));
+        jPanel1.add(serviceList, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 130, 130));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Attend");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 40, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 420, 40, 20));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Service");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 50, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 50, 20));
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Machine");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, 50, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 50, 20));
 
         jLabel11.setBackground(new java.awt.Color(204, 204, 204));
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -202,6 +215,15 @@ public class Dashboard extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jTable2);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 220, 90));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Vehicles :-");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 90, 20));
+
+        vehiclelbl.setForeground(new java.awt.Color(255, 255, 255));
+        vehiclelbl.setText("vehicle");
+        jPanel1.add(vehiclelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 50, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DashboardBackground.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -246,8 +268,16 @@ public class Dashboard extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_statusMousePressed
 
     private void serviceListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serviceListMousePressed
-        new ViewServices().setVisible(true);
+        new VehiclesSummary().setVisible(true);
     }//GEN-LAST:event_serviceListMousePressed
+
+    private void repairListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_repairListMousePressed
+        new MachineDetails().setVisible(true);
+    }//GEN-LAST:event_repairListMousePressed
+
+    private void empAvailableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empAvailableMousePressed
+        new AvailableEmployees().setVisible(true);
+    }//GEN-LAST:event_empAvailableMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -256,6 +286,7 @@ public class Dashboard extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -277,5 +308,6 @@ public class Dashboard extends javax.swing.JInternalFrame {
     private javax.swing.JLabel serviceList;
     private javax.swing.JLabel status;
     private javax.swing.JLabel ve;
+    private javax.swing.JLabel vehiclelbl;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ package home;
 import common.PredefineMethods;
 import java.awt.Color;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -157,8 +158,23 @@ public class Login extends javax.swing.JFrame {
                 PredefineMethods.writeInFile(cur_dir+"\\output\\userType.txt", username);
             } catch (IOException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);}
-        }else if(username.equals("") || password.equals("")){PredefineMethods.viewJoptionPane("You must specify values for the required fields.");}
-        else{PredefineMethods.viewJoptionPane("Data Missmatch");}
+        }
+        else if(username.equals("") || password.equals("")){PredefineMethods.viewJoptionPane("You must specify values for the required fields.");}
+        else try {
+            if(password.equals(PredefineMethods.viewDBValue("SELECT password as password FROM company WHERE username='"+username+"'", "password")))
+            {
+                this.dispose();
+            new MainWindow().setVisible(true);
+            try {
+                String cur_dir = System.getProperty("user.dir");
+                PredefineMethods.writeInFile(cur_dir+"\\output\\userType.txt", username);
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);}
+            }
+            else{PredefineMethods.viewJoptionPane("Data Missmatch");}
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 
     }//GEN-LAST:event_jButton1ActionPerformed
 
